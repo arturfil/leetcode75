@@ -1,7 +1,7 @@
 export function maxProduct(nums: number[]): number {
-    if (nums.length === 0) return 0;
     let max = nums[0], min = nums[0], product = nums[0];
-    for (let num of nums) {
+    for (let i = 1; i < nums.length; i++) {
+        let num = nums[i];
         let tempMax = Math.max(num, max * num, min * num);
         min = Math.min(num, max * num, min * num);
         max = tempMax;

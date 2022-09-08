@@ -8,3 +8,12 @@ function maxProfit(prices: number[]): number {
     }
     return max;
 };
+
+function maxAlt(prices: number[]):number {
+    let max = 0, min = Infinity;
+    for(let num of prices) {
+        min = Math.min(min, num);
+        max = Math.max(max, num - min);
+    }
+    return max;
+}
