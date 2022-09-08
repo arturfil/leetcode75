@@ -1,3 +1,4 @@
+import { kthSmallest } from "./BinaryTrees/KthSmallestElementInBST";
 import { serialize } from "./BinaryTrees/SerializeAndDeserializeBinaryTree";
 import { TreeNode } from "./BinaryTrees/TreeNode";
 import {combinationSum} from "./DynamicPrograming/CombinationSum";
@@ -22,7 +23,7 @@ class Main {
         r_node.left = r_node2;
         r_node.right = r_node3;
 
-        console.log(serialize(root));
+        kthSmallest(root, 3);
     }
 }
 

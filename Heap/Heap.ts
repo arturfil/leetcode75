@@ -1,49 +1,79 @@
-/*
-class Heap {
-    comparator: (parent: any, child: any) => number;
-    data: any;
-    constructor(comparator: (parent: any, child: any) => number) {
+class MinHeap<E extends any,V extends string|number> {
+    public data: E[];
+
+    constructor(private valueConverter:(element:E)=>V=(element:E):V=>element as unknown as V) {
         this.data = [];
-        this.comparator = comparator || ((parent:any, child:any) => parent - child);
     }
 
-    get size() {
+    length(){
         return this.data.length;
     }
 
-    bubbleUp(c:any) {
-        if (c === 0) return;
-        const p = Math.floor((c + 1) / 2) - 1;
-        if (this.comparator(this.data[p], this.data[c]) > 0) {
-            [this.data[p], this.data[c]] = [this.data[c], this.data[p]];
-        }
-        this.bubbleUp(p);
+    peek(){
+        return this.data[0];
     }
 
-    bubbleDown(p:any) {
-        const c = 2 * (p + 1) - 1;
-        if (c >= this.data.length) return;
-
-        const leftDelta = this.comparator(this.data[p], this.data[c]);
-        const rightDelta = c + 1 >= this.data.length ? 0 : this.comparator(this.data[p], this.data[c + 1]);
-        if (leftDelta <= 0 && rightDelta <= 0) return;
-
-        const swapChildIndex = c + (leftDelta <= rightDelta);
-        [this.data[p], this.data[swapChildIndex]] = [this.data[swapChildIndex], this.data[p]];
-        this.bubbleDown(swapChildIndex);
+    getParentIndex(index: number) {
+        return Math.floor((index - 1) / 2);
     }
 
-    add(val:any) {
+    getLeftIndex(index: number) {
+        return (index * 2) + 1;
+    }
+
+    getRightIndex(index: number) {
+        return (index * 2) + 2;
+    }
+
+    private getValue(index:number):V{
+        return this.valueConverter(this.data[index]);
+    }
+
+    push(val: E) {
         this.data.push(val);
-        this.bubbleUp(this.data.length - 1);
+        let lastIndex = this.data.length-1;
+        while (lastIndex > 0 && this.getValue(this.getParentIndex(lastIndex)) > this.getValue(lastIndex)) {
+            let parentIndex = this.getParentIndex(lastIndex);
+            this.swap(parentIndex,lastIndex);
+            lastIndex = parentIndex;
+        }
     }
 
-    poll() {
-        if (this.size < 2) return this.data.pop();
-        [this.data[0], this.data[this.size - 1]] = [this.data[this.size - 1], this.data[0]];
-        const val = this.data.pop();
-        this.bubbleDown(0);
-        return val;
+    private swap(sIndex: number, tIndex: number) {
+        let element = this.data[sIndex];
+        this.data[sIndex] = this.data[tIndex];
+        this.data[tIndex] = element;
+    }
+
+    pop(): E | undefined{
+        if (this.data.length === 0)
+            return undefined;
+        if(this.data.length===1){
+            return this.data.splice(0,1)[0];
+        }
+        let res = this.data[0];
+        this.data[0] = this.data.pop()!;
+        let index = 0;
+        while (true) {
+            let leftIndex = this.getLeftIndex(index);
+            let rightIndex = this.getRightIndex(index);
+            if ((leftIndex<this.data.length && this.getValue(index) > this.getValue(leftIndex)) ||
+                (rightIndex<this.data.length && this.getValue(index) > this.getValue(rightIndex))) {
+                let largestIndex = leftIndex;
+                if(rightIndex<this.data.length && this.getValue(leftIndex)>this.getValue(rightIndex)) {
+                    largestIndex = rightIndex;
+                }
+                this.swap(largestIndex,index);
+                index = largestIndex;
+                continue;
+            }
+            break;
+        }
+        return res;
+    }
+
+    add(arr: any[]) {
+        for (let element of arr)
+            this.push(element);
     }
 }
-*/
