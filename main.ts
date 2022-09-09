@@ -1,3 +1,4 @@
+import { findMid } from "./Arrays/FindMinimumInRotatedSortedArray";
 import { kthSmallest } from "./BinaryTrees/KthSmallestElementInBST";
 import { serialize } from "./BinaryTrees/SerializeAndDeserializeBinaryTree";
 import { TreeNode } from "./BinaryTrees/TreeNode";
@@ -11,19 +12,7 @@ import { pacificAtlantic } from "./Graphs/PacificAtlanticWaterFlow";
 class Main {
     
     main(args?: string[]) {
-        let root = new TreeNode(1);
-        let l_node = new TreeNode(2);
-
-        let r_node = new TreeNode(3);
-        let r_node2 = new TreeNode(4);
-        let r_node3 = new TreeNode(5);
-
-        root.left = l_node;
-        root.right = r_node;
-        r_node.left = r_node2;
-        r_node.right = r_node3;
-
-        kthSmallest(root, 3);
+        findMid([5,6,7,8,9,10,11,12,13,1,2,3,4]);
     }
 }
 
