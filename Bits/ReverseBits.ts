@@ -1,9 +1,9 @@
 function reverseBits(n: number): number {
-    let res = 0, power = 31;
-    while (n) {
-        res += (n & 1) << power;
-        n = n >>> 1;
-        power -= 1;
+    let res = 0;
+    for (let i = 0; i < 32; i++) {
+        res <<= 1;
+        res |= n & 1
+        n >>= 1;
     }
     return res >>> 0;
 };
