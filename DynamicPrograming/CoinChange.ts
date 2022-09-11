@@ -1,3 +1,10 @@
+/**
+ * 
+ * Time complexity is coins.length * amount => O(m * n) not realy n^2 but larger than linear.
+ * 
+ * 
+ */
+
 export function  coinChange(coins: number[], amount: number):number {
     const dp = Array(amount + 1).fill(Infinity);
     dp[0] = 0;
