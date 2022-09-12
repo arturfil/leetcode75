@@ -8,14 +8,12 @@ export function numDecodings(s: string): number {
     dp[1] = 1;
 
     for (let i = 2; i <= s.length; i++) {
-        const a = Number(s.slice(i - 1, i)); // last one digit
-        if (a >= 1 && a <= 9) {
-            dp[i] += dp[i - 1];
-        }
-        const b = Number(s.slice(i - 2, i)); // last two digits
-        if (b >= 10 && b <= 26) { 
-            dp[i] += dp[i - 2];
-        }
+        const one_dig = Number(s.slice(i - 1, i)); // one digit
+        const two_dig = Number(s.slice(i - 2, i)); // two digits
+        
+        if (one_dig >= 1 && one_dig <= 9) dp[i] += dp[i - 1];
+        if (two_dig >= 10 && two_dig <= 26) dp[i] += dp[i - 2];
+        
     }
 
     return dp[s.length];

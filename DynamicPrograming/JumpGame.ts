@@ -1,9 +1,9 @@
 export function canJump(nums: number[]): boolean {
-    let last = nums.length-1;
+    let prev = nums.length-1;
     for (let i = nums.length-2; i >= 0; i--) {
-        if (i + nums[i] >= last) {
-            last = i;
+        if (i + nums[i] >= prev) {
+            prev = i;
         }
     }
-    return last === 0;
+    return prev === 0;
 }
