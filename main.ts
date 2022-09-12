@@ -1,21 +1,14 @@
-import { findMid } from "./Arrays/FindMinimumInRotatedSortedArray";
-import { kthSmallest } from "./BinaryTrees/KthSmallestElementInBST";
-import { serialize } from "./BinaryTrees/SerializeAndDeserializeBinaryTree";
-import { TreeNode } from "./BinaryTrees/TreeNode";
-import { combinationSum } from "./DynamicPrograming/CombinationSum";
-import { rob } from "./DynamicPrograming/HouseRobber";
-import { longestCommonSubsequenceAlt } from "./DynamicPrograming/LongestCommonSubsequence";
-import { lenghtOFLIS } from "./DynamicPrograming/LongestIncreasingSubsequence";
-import { uniquePaths } from "./DynamicPrograming/UniquePaths";
-import { wordBreak } from "./DynamicPrograming/WordBreak";
-import { validTree } from "./Graphs/GraphValidTree";
-import { pacificAtlantic } from "./Graphs/PacificAtlanticWaterFlow";
-
+import { uniquePaths, uniquePathsDP } from "./DynamicPrograming/UniquePaths";
 
 class Main {
     
     main(args?: string[]) {
-        combinationSum([2,3,6,7], 7);
+        uniquePathsDP(3,6); // 21
+        /*
+            [S,6,5,4,3,2],
+            [6,5,4,3,2,1],
+            [5,4,3,2,1,G]
+        */
     }
 }
 
