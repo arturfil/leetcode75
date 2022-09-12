@@ -1,9 +1,9 @@
 export function rob(nums: number[]): number {
-    let house1 = 0, house2 = 0;
+    let low_max = 0, big_max = 0
     for (let n of nums) {
-        let temp = Math.max(house1 + n, house2)
-        house1 = house2;
-        house2 = temp
+        let temp_max = Math.max(low_max + n, big_max);
+        low_max = big_max
+        big_max = temp_max;
     }
-    return house2;
+    return big_max;
 }

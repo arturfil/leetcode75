@@ -1,3 +1,10 @@
+/**
+ * 
+ * Run time complexity is O(Nodes ^ [(Targets/Minimal Values) + 1] ) => O(N^(t/m + 1))
+ * 
+ * Space complexity is O(T/M)
+ */
+
 export function combinationSum(candidates: number[], target: number): number[][] {
     let results:number[][] = [];
 
