@@ -4,12 +4,12 @@ export function reorderList(head: ListNode | null): void {
     if (!head) return;
     let slow = head, fast = head;
     // find halfway
+    // when fast reached null, slow will reach halfway
     while (fast && fast.next) {
-        slow = slow!.next!;
+        slow = slow.next!;
         fast = fast.next.next!;
     }
-    // start on 2nd half and reverse
-    // let secondStart = slow!.next;
+    // reversing first half
     let prev = null;
     while (slow !== null) {
         let temp = slow.next;
@@ -17,16 +17,17 @@ export function reorderList(head: ListNode | null): void {
         prev = slow;
         slow = temp!;
     }
-
-    // merge TwoLists
-    let first = head;
-    let second = prev
     
+    //  second list
+    let first = head;
+    // fist list
+    let second = prev;
+    //  merge TwoLists
     while (second?.next) {
         let temp = first.next;
         first.next = second;
         first = temp!;
-
+              
         temp = second.next;
         second.next = first;
         second = temp;

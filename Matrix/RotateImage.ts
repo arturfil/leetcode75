@@ -7,30 +7,6 @@ export function rotate(matrix: number[][]): void {
     }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 export function alt(matrix: number[][]): void {
     printMatrix(matrix)
     let n = matrix.length;
@@ -40,14 +16,14 @@ export function alt(matrix: number[][]): void {
             [matrix[i][j],matrix[j][i]] = [matrix[j][i],matrix[i][j]];
         }
     }
-    printMatrix(matrix);
+    // printMatrix(matrix);
     // reflect
     for(let i = 0; i < n; i++) {
         for(let j = 0; j < Math.floor(n/2); j++) {
             [matrix[i][j],matrix[i][n-j-1]] = [matrix[i][n-j-1],matrix[i][j]];
         }
     }
-    printMatrix(matrix);
+    // printMatrix(matrix);
 }
 
 function printMatrix(matrix: number[][]) {
