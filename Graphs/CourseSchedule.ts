@@ -1,8 +1,7 @@
 export function canFinish(numCourses: number, prerequisites: number[][]): boolean {
     const visited = new Set<number>();
     const current = new Set<number>();
-    const preReqs = new Array<number[]>(numCourses);
-    for (let i = 0; i < preReqs.length; i++) preReqs[i] = []; // you do this to avoid same reference in all array
+    const preReqs = new Array<number[]>(numCourses).fill([]).map(_ => new Array().fill([]));
 
     for (let [c,p] of prerequisites) {
         preReqs[p].push(c);

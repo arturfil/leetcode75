@@ -13,8 +13,6 @@
     }
 }
 
-
-
 function findWords(board: string[][], words: string[]): string[] {
 
     let answer:any[] = [];
