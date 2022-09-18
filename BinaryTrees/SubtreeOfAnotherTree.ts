@@ -7,8 +7,8 @@ function isSubtree(root: TreeNode | null, subRoot: TreeNode | null): boolean {
 }
 
 function equals(node: TreeNode, subNode: TreeNode):boolean {
-    if (node === null && subNode === null) return true;
-    if (node == null || subNode === null) return false; 
+    if (!node && !subNode) return true;
+    if (!node || !subNode) return false;
     if (node.val !== subNode.val) return false;
     return equals(node.left!, subNode.left!) && equals(node.right!, subNode.right!);
 }
