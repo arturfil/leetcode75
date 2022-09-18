@@ -1,6 +1,6 @@
 export function validTree(n: number, edges: number[][]): boolean {
     if (edges.length + 1 > n) return false;
-    const graph:number[][] = Array.from({length: n}, () => []);
+    const graph:number[][] = Array.from(Array(n), () => []);
     for (const [from,  to] of edges) {
         graph[from].push(to);
         graph[to].push(from);

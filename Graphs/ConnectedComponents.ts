@@ -1,4 +1,4 @@
-function countComponents(n: number, edges: number[][]):number {
+export function countComponents(n: number, edges: number[][]):number {
     const nums = Array(n).fill(-1);
     // union find
     for (let i = 0; i < edges.length; i++){

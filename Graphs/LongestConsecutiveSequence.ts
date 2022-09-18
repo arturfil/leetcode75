@@ -1,9 +1,6 @@
 export function longestConsecutive(nums: number[]): number {
     let len = 0;
-    const set = new Set();
-    for(let num of nums) {
-        set.add(num);
-    }
+    const set = new Set(nums);
 
     for(let num of nums) {
         let current = 1;
