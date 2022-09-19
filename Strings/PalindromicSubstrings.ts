@@ -1,20 +1,19 @@
-export function countSubstrings(s: string):number {
-    let odd = 0, even = 0, max = 0;
+export function countSubstrings(s: string): number {
+    let sum = 0, odd = 0, even = 0;
     for (let i = 0; i < s.length; i++) {
-        odd = isPalindrome(s, i, i);
-        even = isPalindrome(s, i, i+1);
-        let current = Math.max(odd, even);
-        max += current;
+        odd = subPalindrome(s, i, i);
+        even = subPalindrome(s, i, i+1);
+        sum += (odd + even);
     }
-    return max;
-}
+    return sum;
+};
 
-function isPalindrome(s:string, left:number, right:number) {
+function subPalindrome(s:string, l: number, r:number) {
     let count = 0;
-    while (s[left] === s[right] && left >= 0 && right <= s.length) {
-            count++;
-            right++;
-            left--;
+    while (s[l] === s[r] && l >= 0 && r <= s.length) {
+        l -= 1;
+        r += 1;
+        count += 1
     }
     return count;
 }

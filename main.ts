@@ -1,9 +1,12 @@
 import { validTree } from "./Graphs/GraphValidTree";
+import { groupOfAnagrams } from "./Strings/GroupOfAnagrams";
+import { characterReplacement } from "./Strings/LongestRepeatingCharacterReplacement";
+import { lengthOfLongestSubstring } from "./Strings/LongestSubstringNoRepeating";
 
 class Main {
     
     main(args?: string[]) {
-        validTree(5, [[0,1],[0,2],[0,3],[1,4]]);
+        
     }
 }
 
