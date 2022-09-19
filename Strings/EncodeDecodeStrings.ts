@@ -14,8 +14,8 @@ function decode(s: string): string[] {
             j++;
         }
         const len = Number(s.slice(i, j));
-        res.push(s.slice(++j, j + len));
-        i = j + len;
+        res.push(s.slice(j + 1, j + 1+ len));
+        i = j + 1 + len;
     }
     return res;
 };
