@@ -7,13 +7,10 @@
 import { TreeNode } from "./TreeNode";
 
 function lowestCommonAncestor(root: TreeNode | null, p: TreeNode | null, q: TreeNode | null): TreeNode | null | void {
-    while (root !== null) {
-        if (root.val < p!.val && root!.val < q!.val) {
-            root = root.right;
-        } else if (root!.val > p!.val && root!.val > q!.val) {
-            root = root.left;
-        } else {
-            return root;
-        }
-    }
+    if (!root || root === p || root === q) return root;
+    const left = lowestCommonAncestor(root.left, p, q);
+    const right = lowestCommonAncestor(root.right, p, q);
+    if (!left) return right;
+    if (!right) return left;
+    return root;
 };
