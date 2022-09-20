@@ -12,3 +12,8 @@ function equals(node: TreeNode, subNode: TreeNode):boolean {
     if (node.val !== subNode.val) return false;
     return equals(node.left!, subNode.left!) && equals(node.right!, subNode.right!);
 }
+
+
+// LEFT ->  ROOT  -> RIGHT = In Order   | [4,2,5,1,3,6,7] 
+// ROOT ->  LEFT  -> RIGHT = Pre Order  | [1,2,4,5,3,6,7] 
+// LEFT ->  RIGHT -> ROOT  = Post Order | [4,5,2,6,7,3,1]

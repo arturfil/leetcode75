@@ -8,18 +8,21 @@ import { TreeNode } from "./TreeNode";
 export function kthSmallest(root: TreeNode | null, k: number): number | void {
     const stack = [];
     let n = 0;
-    let curr = root!;
+    let current = root;
     
     while (true) {
-        if (curr) {
-            stack.push(curr)
-            curr = curr.left!;
+        // you are going all left until null
+        if (current) {
+            stack.push(current)
+            current = current.left;
         } else {
-            if (stack.length === 0) break;
-            curr = stack.pop()!;
+            // once current == null you pop values until n === k
+            // where current is the kth smallest,
+            // or need to keep going deeper to the right node && LEFT again
+            current = stack.pop()!;
             n += 1;
-            if (n === k) return curr.val;
-            curr = curr.right!;
+            if (n === k) return current.val;
+            current = current.right;
         }
     }
 }

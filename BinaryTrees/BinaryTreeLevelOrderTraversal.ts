@@ -6,18 +6,20 @@ import { TreeNode } from "./TreeNode";
  * Memory complexity O(n)
  */
 
+// This is a BFS
 function levelOrder(root: TreeNode | null): number[][] {
     if (!root) return [];
     let res = [], queue = [root];
  
     while (queue.length) {
-        const numNodes = queue.length;
+        const qLen = queue.length // we do this to keep this len constant
+        // although queue.lenght could change;
         const subList = [];
-        for (let i = 0; i < numNodes; i++) {
-            const subtree = queue.shift();
-            subList.push(subtree!.val);
-            if (subtree?.left !== null) queue.push(subtree!.left);
-            if (subtree?.right !== null) queue.push(subtree!.right);
+        for (let i = 0; i < qLen; i++) {
+            const subNode = queue.shift();
+            subList.push(subNode!.val);
+            if (subNode?.left !== null) queue.push(subNode!.left);
+            if (subNode?.right !== null) queue.push(subNode!.right);
         }
         res.push(subList);
     }
