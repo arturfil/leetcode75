@@ -17,7 +17,7 @@ class Trie {
 
     insert(word:string): void {
         let curr = this.root;
-        for (const char of word) {
+        for (let char of word) {
             if (!curr.children.has(char)) {
                 curr.children.set(char, new TrieNode());
             }
@@ -35,7 +35,7 @@ class Trie {
         return curr.isWord;
     }
 
-    startsWith(prefix: string) {
+    startsWith(prefix: string):boolean {
         let curr = this.root;
         for (const char of prefix) {
             if (!curr.children.has(char)) {

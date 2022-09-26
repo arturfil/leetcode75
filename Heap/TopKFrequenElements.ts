@@ -26,9 +26,8 @@ export function topKFrequent(nums: number[], k: number): number[] {
 
 export function bucketSort(nums: number[], k: number) {
     const map = new Map<number, number>();
-    const buckets = new Array<number[]>(nums.length + 1); // has lenght of null values
-    console.log(buckets); // check how this is empty spaces not even arrays
-    for(let i = 0; i < buckets.length; i++) buckets[i] = []; // initialize value of array
+    const buckets = new Array(nums.length + 1).fill(0).map(x => new Array().fill([]));
+    
 
     for (let num of nums) {
         if (map.has(num)) {
@@ -42,10 +41,7 @@ export function bucketSort(nums: number[], k: number) {
         buckets[count!].push(num);
     }
 
-    console.log(buckets);
     const flat_buckets = buckets.flat();
-    console.log(flat_buckets);
-    
     return flat_buckets.slice(flat_buckets.length - k);
 }
 

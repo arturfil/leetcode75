@@ -1,6 +1,6 @@
 import { ListNode } from "./ListNode";
 
-function removeNthFromEnd(head: ListNode | null, n: number): ListNode | null {
+export function removeNthFromEnd(head: ListNode | null, n: number): ListNode | null {
     // create dummy nodes
     let currNode = head, nodeBeforeN = head;
     // get all the way to N node to delete
@@ -22,3 +22,18 @@ function removeNthFromEnd(head: ListNode | null, n: number): ListNode | null {
     nodeBeforeN!.next = nodeBeforeN!.next!.next
     return head;
 }
+
+/*
+    let l1 = new ListNode(1);
+    let l2 = new ListNode(2);
+    let l3 = new ListNode(3);
+    let l4 = new ListNode(4);
+    let l5 = new ListNode(5);
+
+    l1.next = l2;
+    l2.next = l3;
+    l3.next = l4;
+    l4.next = l5;
+
+    removeNthFromEnd(l1, 2);
+ */
