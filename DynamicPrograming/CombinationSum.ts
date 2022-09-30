@@ -5,17 +5,20 @@
  * Space complexity is O(T/M)
  */
 
-export function combinationSum(candidates: number[], target: number): number[][] {
-    let res:number[][] = [];
-    dfs(target, [], 0, res, candidates);
-    return res;
+function combinationSum(candidates: number[], target: number): number[][] {
+    let result:number[][] = [];
+    dfs(target, [], 0, result, candidates);
+    return result;
 }
 
-function dfs(remain:number, sol:number[], index:number, res: number[][], candidates:number[]) {
+function dfs(remain:number, sol:number[], index:number, result: number[][], candidates:number[]) {
+    if (remain === 0) result.push([...sol]);
     if (remain < 0) return;
-    if (remain === 0) res.push(sol);
     for (let i = index; i < candidates.length; i++) {
-        let new_sol = [...sol, candidates[i]];
-        dfs((remain - candidates[i]), new_sol, i, res, candidates);
+        sol.push(candidates[i]);
+        dfs(remain - candidates[i], sol, i, result, candidates);
+        sol.pop();
     }
 }
+
+export default combinationSum;

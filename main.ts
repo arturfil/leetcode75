@@ -1,17 +1,24 @@
-import { combinationSum } from "./DynamicPrograming/CombinationSum";
-import { validTree } from "./Graphs/GraphValidTree";
-import { ListNode } from "./LinkedLists/ListNode";
-import { removeNthFromEnd } from "./LinkedLists/RemoveNFromEnd";
+import search from "./Arrays/SearchInRotatedSortedArray";
+import { TicTacToe } from "./DesignSystems/DesignTicTacToe";
+import flatten from "./HashMaps/FlattendDictionary";
 import { selectRandomProblem } from "./problems";
-import { groupOfAnagrams } from "./Strings/GroupOfAnagrams";
-import { characterReplacement } from "./Strings/LongestRepeatingCharacterReplacement";
-import { lengthOfLongestSubstring } from "./Strings/LongestSubstringNoRepeating";
 
 class Main {
-    
+
     main(args?: string[]) {
-        selectRandomProblem();        
-        // combinationSum([2,3,5], 8);
+        // selectRandomProblem();
+        let tic = new TicTacToe(3);
+        tic.move(0, 0, 1);
+        tic.move(0, 2, 2);
+        tic.move(2, 2, 1);
+        tic.move(1, 2, 2);
+        tic.move(1, 1, 1);
+        tic.move(1, 0, 2);
+        // tic.move(2, 1, 1);
+        tic.move(0, 1, 1);
+        tic.move(1, 2, 2);
+        
+        
     }
 }
 

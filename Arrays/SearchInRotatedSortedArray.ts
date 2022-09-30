@@ -1,4 +1,4 @@
-function search(nums: number[], target): number {
+function search(nums: number[], target:number): number {
     let left = 0, right = nums.length-1;
     // [7,0,1,2,3,4,5,6]; target = 0;
     while (left <= right) {
@@ -19,3 +19,5 @@ function search(nums: number[], target): number {
     }   
     return -1;
 }
+
+export default search;

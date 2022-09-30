@@ -1,4 +1,4 @@
-export function numIslands(grid: string[][]) {
+function numIslands(grid: string[][]) {
     let count = 0;
     for(let i = 0; i < grid.length; i++) {
         for (let j = 0; j < grid[i].length; j++) {
@@ -18,3 +18,5 @@ function dfs(grid: string[][], i: number, j: number) {
     if (i > 0) dfs(grid, i - 1, j);
     if (j > 0) dfs(grid, i, j - 1);
 }
+
+export default numIslands;
