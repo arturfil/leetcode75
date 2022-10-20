@@ -10,9 +10,8 @@ export function groupOfAnagrams(strs: string[]): string[][] {
         }
   
         const signature = count.toString();
-        if (!map.has(signature)) map.set(signature, []);
-  
-        map.get(signature)?.push(word);
+        if (!map.has(signature)) map.set(signature, [word]);  
+        else map.get(signature)?.push(word);
     }
     return Array.from(map.values());
 }

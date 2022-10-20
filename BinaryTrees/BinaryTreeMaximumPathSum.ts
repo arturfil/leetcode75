@@ -6,21 +6,19 @@ import { TreeNode } from "./TreeNode";
  * Memory Complexity Olog(n) // height of the tree
  */
 function maxPathSum(root: TreeNode | null): number {
-    if (!root) return 0;
-    const res = [root.val];
-    dfs(root, res);
-    return res[0];
-}
+    let max = {val: root!.val};
+    
+    dfs(root!, max);
+    return max.val;
+};
 
-function dfs(root: TreeNode, res: number[]): number {
-    if (!root) return 0;
-
-    let leftMax = dfs(root.left!, res);
-    let rightMax = dfs(root.right!, res);
-
-    leftMax = Math.max(leftMax!, 0);
-    rightMax = Math.max(rightMax!, 0);
-
-    res[0] = Math.max(res[0], root.val + leftMax + rightMax);
-    return root.val + Math.max(leftMax, rightMax);
+function dfs(node: TreeNode, max:{val:number}):number {
+    if (!node) return 0;
+    
+    let left = dfs(node.left!, max); // this is what the return max(...) assigns to
+    let right = dfs(node.right!, max);
+    
+    max.val = Math.max(left + right + node.val, max.val); // to asign to max
+    return Math.max(0, left + node.val, right + node.val); // to asign to left node or right node | split/choose path
+    
 }

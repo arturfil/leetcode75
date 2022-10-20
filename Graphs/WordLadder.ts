@@ -1,4 +1,39 @@
-function ladderLength(beginWord: string, endWord: string, wordList: string[]): number {
+function ladderLength(beginWord: string, endWord: string, wordList: string[]): number { 
+    let adjacentList = new Map();
+    // generate adjacency list
+    for(let word of wordList) {
+        for(let i = 0; i < word.length; i++) {
+            let newWord = word.substring(0, i) + "*" + word.substring(i+1);
+            if(!adjacentList.has(newWord)) adjacentList.set(newWord, [word]);
+            else adjacentList.get(newWord).push(word);
+        }
+    }    
+
+    let queue:Array<[string, number]> = [[beginWord, 1]];
+    let visited = {[beginWord]: true};
+
+    while (queue.length !== 0) { // BFS
+        const [word, level] = queue.shift()!;
+        for(let i = 0; i < word.length; i++) {
+            let newWord = word.substring(0, i) + "*" + word.substring(i+1);
+            let adjacentWords = adjacentList.get(newWord);
+            if (adjacentWords) {
+                for(let item of adjacentWords) {
+                    if (item === endWord) return level + 1;
+                    if (!visited[item]) {
+                        visited[item] = true;
+                        queue.push([item, level+1]);
+                    }
+                }
+            }
+        }
+    }
+    return 0;
+}
+
+export default ladderLength;
+/*// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: // 
+function ladderLengthAlt(beginWord: string, endWord: string, wordList: string[]): number {
     const set = new Set(wordList);
     let step = 1;
     let queue = [beginWord];
@@ -24,3 +59,6 @@ function ladderLength(beginWord: string, endWord: string, wordList: string[]): n
     }
     return 0;
 };
+// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: //*/
+
+

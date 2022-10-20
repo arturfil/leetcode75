@@ -17,3 +17,14 @@ function maxAlt(prices: number[]):number {
     }
     return max;
 }
+
+function maxAlt2(prices: number[]): number {
+    let max = 0, min = Infinity;
+    for(let p of prices) {
+        if (p < min) min = p    
+        else {
+            max = Math.max(max, p - min);       
+        }
+    }
+    return max;
+};

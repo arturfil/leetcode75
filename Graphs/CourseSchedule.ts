@@ -3,8 +3,8 @@ export function canFinish(numCourses: number, prerequisites: number[][]): boolea
     const current = new Set<number>();
     const preReqs = new Array<number[]>(numCourses).fill([]).map(_ => new Array().fill([]));
     // you are pushing the courses IN the index of the prereq.
-    for (let [c,p] of prerequisites) {
-        preReqs[c].push(p);
+    for (let [course,prereq] of prerequisites) {
+        preReqs[course].push(prereq);
     }
     // you will run the loop for each coure num.
     for (let i = 0; i < numCourses; i++) {

@@ -14,28 +14,23 @@
 }
 
 function findWords(board: string[][], words: string[]): string[] {
-
     let answer:any[] = [];
-    let row = board.length;
-    let col = board[0].length;
+    let row = board.length, col = board[0].length;
     let root = new STrieNode();
-    
-    
-    for (let i = 0; i < words.length; i++) {
-        let word = words[i];
-        let cur = root;
-        for (let j = 0; j < word.length; j++) {
-            let ch = word[j];
-            if (!cur.links.has(ch)) {
+
+    for (let word of words) {
+        let current = root;
+        for(let character of word) {
+            if (!current.links.has(character)) {
                 let newNode = new STrieNode();
-                cur.links.set(ch, newNode);
-                cur = newNode;
+                current.links.set(character, newNode);
+                current = newNode;      
             } else {
-                cur = cur.links.get(ch)!;
+                current = current.links.get(character)!;
             }
         }
-        cur.word = word;
-        cur.end = true;
+        current.word = word;
+        current.end = true;
     }
     
     for (let i = 0; i < row; i++) {
@@ -60,27 +55,13 @@ function findWords(board: string[][], words: string[]): string[] {
         let ch = board[i][j];
         board[i][j] = "#";
         
-        if (i+1 < row && curNode.links.has(board[i+1][j])) {
-            backTrack(curNode, i+1, j);
-        }
-        
-        if (i-1 >= 0 && curNode.links.has(board[i-1][j])) {
-            backTrack(curNode, i-1, j);
-        }
-    
-        if (j+1 < col && curNode.links.has(board[i][j+1])) {
-            backTrack(curNode, i, j+1);
-        }
-    
-        if (j-1 >= 0 && curNode.links.has(board[i][j-1])) {
-            backTrack(curNode, i, j-1);
-        }
+        if (i+1 < row && curNode.links.has(board[i+1][j])) backTrack(curNode, i+1, j);
+        if (i-1 >= 0 && curNode.links.has(board[i-1][j])) backTrack(curNode, i-1, j);
+        if (j+1 < col && curNode.links.has(board[i][j+1])) backTrack(curNode, i, j+1);
+        if (j-1 >= 0 && curNode.links.has(board[i][j-1])) backTrack(curNode, i, j-1);
     
         board[i][j] = ch;
-    
-        if (curNode.links.size === 0) {
-            node.links.delete(letter);
-        }
+        if (curNode.links.size === 0) node.links.delete(letter);
     }
 
 };

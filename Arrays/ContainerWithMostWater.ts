@@ -1,11 +1,12 @@
 export function maxArea(height: number[]): number {
-    let max = 0, left = 0, right = height.length-1;
+    let left = 0, right = height.length-1, max_area = 0;
+    
     while (left < right) {
-        let base = right - left;
-        let current_height = Math.min(height[left], height[right]);
-        max = Math.max(max, base * current_height);
+        let min_height = Math.min(height[left], height[right]);
+        let area = (right - left) * min_height;
+        max_area = Math.max(area, max_area );
         if (height[left] < height[right]) left++;
-        else right--
+        else right--;
     }
-    return max;
-}
+    return max_area;
+};

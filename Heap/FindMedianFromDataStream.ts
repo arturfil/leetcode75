@@ -2,8 +2,9 @@
  * Max & Min priority queue as
  */
 
+/*
 class MedianFinder {
-    /*
+    
     minHeap = new MinPriorityQueue({
         priority: (val) => val,
     });
@@ -33,5 +34,5 @@ class MedianFinder {
             return this.minHeap.front().element;
         else return this.maxHeap.front().element;
     }
-    */
 }
+*/

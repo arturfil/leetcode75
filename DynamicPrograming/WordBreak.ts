@@ -3,9 +3,9 @@ export function wordBreak(s: string, wordDict: string[]): boolean{
     dp[0] = true;
     for (let i = 0; i < s.length; i++) {
         if (dp[i] === true) {
-            for (let word of wordDict) {
-                if (s.slice(i, i + word.length) === word) {
-                    dp[i + word.length] = true;
+            for (let w of wordDict) {
+                if (s.slice(i, i + w.length) === w) {
+                    dp[i + w.length] = true;
                 }
             }
         }

@@ -1,10 +1,14 @@
+/**
+ * Time Complexity O(m) length of word
+ * Space Complexity O(m) length of the word
+ */
 class TrieNode {
     children:Map<string, TrieNode>;
-    isWord:boolean
+    isEnd:boolean
 
     constructor() {
         this.children = new Map<string, TrieNode>();
-        this.isWord = false;
+        this.isEnd = false;
     }
 }
 
@@ -16,32 +20,32 @@ class Trie {
     }
 
     insert(word:string): void {
-        let curr = this.root;
+        let current = this.root;
         for (let char of word) {
-            if (!curr.children.has(char)) {
-                curr.children.set(char, new TrieNode());
+            if (!current.children.has(char)) {
+                current.children.set(char, new TrieNode());
             }
-            curr = curr.children.get(char)!;
+            current = current.children.get(char)!;
         }
-        curr.isWord = true;
+        current.isEnd = true;
     }
 
     search(word: string):boolean {
-        let curr = this.root;
+        let current = this.root;
         for(const char of word) {
-            if (!curr.children.has(char)) return false;
-            curr = curr.children.get(char)!;
+            if (!current.children.has(char)) return false;
+            current = current.children.get(char)!;
         }
-        return curr.isWord;
+        return current.isEnd;
     }
 
     startsWith(prefix: string):boolean {
-        let curr = this.root;
+        let current = this.root;
         for (const char of prefix) {
-            if (!curr.children.has(char)) {
+            if (!current.children.has(char)) {
                 return false;
             }
-            curr = curr.children.get(char)!
+            current = current.children.get(char)!
         }
         return true;
     }

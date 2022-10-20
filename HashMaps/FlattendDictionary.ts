@@ -4,7 +4,7 @@ function flatten(dict: Object) {
     return res;
   }
   
-function helper(obj:any, suffix: string, ans: any) {
+function helper(obj:any, suffix: string, res: any) {
     for (let k in obj) {
         let key;
         if (suffix !== '' && k !== '') {
@@ -16,9 +16,9 @@ function helper(obj:any, suffix: string, ans: any) {
         }
         
         if (typeof obj[k] === 'object') { 
-            helper(obj[k], key, ans);
+            helper(obj[k], key, res);
         } else {
-            ans[key] = obj[k];
+            res[key] = obj[k];
         }
     }
 }

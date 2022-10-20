@@ -13,7 +13,7 @@ export function serialize(root: TreeNode | null): string {
     // dfs node
     function dfs(node: TreeNode) {
         if (!node) {
-            res.push('N');
+            res.push('null');
             return;
         }
         res.push(String(node.val));
@@ -29,7 +29,7 @@ function deserialize(data: string): TreeNode | null {
     let i = 0;
     //
     function dfs() {
-        if (vals[i] === 'N') {
+        if (vals[i] === 'null') {
             i += 1;
             return null;
         }
