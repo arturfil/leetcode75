@@ -1,80 +1,27 @@
-class ListNode {
-    key:number;
-    val:number;
-    prev:ListNode |  null = null;
-    next:ListNode |  null = null;
-
-    constructor(key:number, val:number) {
-        this.key = key;
-        this.val = val;
-        this.prev = null;
-        this.next = null;
-    }
-}
-
-class DoublyLinkedList {
-    head = new ListNode(0,0);
-    tail = new ListNode(0,0);
-    constructor() {
-        this.head.next = this.tail;
-        this.tail.next = this.head;
-    }
-
-    insertHead(node:ListNode) {
-        node.prev = this.head;
-        node.next = this.head.next;
-        this.head.next!.prev = node;
-        this.head.next = node;
-    }
-
-    ListremoveNode(node:ListNode) {
-        let prev = node.prev;
-        let next = node.next;
-        prev!.next = next;
-        next!.prev = prev;
-    }
-
-    moveToHead(node:ListNode) {
-        this.ListremoveNode(node);
-        this.insertHead(node);
-    }
-
-    removeTail() {
-        let tail = this.tail.prev;
-        this.ListremoveNode(tail!);
-        return tail?.key;
-    }
-}
-
 class LRUCache {
-    capacity:number;
-    map = new Map<number,ListNode>();
-    dll = new DoublyLinkedList();
-
+    capacity: number;
+    map:Map<number, number>;
+    
     constructor(capacity:number) {
         this.capacity = capacity;
+        this.map = new Map();
     }
 
-    get(key: number):number {
-        let node = this.map.get(key);
-        if (!node) return -1;
-        this.dll.moveToHead(node);
-        return node.val;
+    get(key:number):number {
+        const value = this.map.get(key);
+        if(value === undefined) return -1;
+        this.map.delete(key); // remove
+        this.map.set(key,value); // at to the end -> most recent used
+        return value;
     }
 
-    put(key:number, value:number):void {
-        let node = this.map.get(key);
-        if (!node) {
-            let ListnewNode = new ListNode(key, value);
-            this.map.set(key, ListnewNode);
-            this.dll.insertHead(ListnewNode);
-            if (this.map.size > this.capacity) {
-                let tailKey = this.dll.removeTail();
-                this.map.delete(tailKey!);
-            }
-        } else {
-            node.val = value;
-            this.dll.moveToHead(node);
+    put(key:number, value:number): void {
+        if(this.map.size >= this.capacity && !this.map.has(key)) {
+            const firstKey = this.map.keys().next().value;
+            this.map.delete(firstKey); // least recent key, delete
         }
+
+        this.map.delete(key); // in case key is already there, delete 
+        this.map.set(key, value);// re-add to put as most recent
     }
 }

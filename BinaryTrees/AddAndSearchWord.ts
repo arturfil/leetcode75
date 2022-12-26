@@ -1,40 +1,40 @@
+
+interface INode {
+    children: Map<string, INode>
+    isWord: boolean
+}
+
+function createNode(): INode {
+    return { children: new Map(), isWord: false }
+}
+
 class WordDictionary {
-    isWord: boolean;
-    child: {[Key: string]: WordDictionary};
+    private trie: INode
+
     constructor() {
-        this.child = {}; 
-        this.isWord = false;
+        this.trie = createNode();
     }
 
     addWord(word: string): void {
-        let curr: WordDictionary = this;
-        for(const c of word) {
-            if(!curr.child[c]) {
-                curr.child[c] = new WordDictionary();
+        let node = this.trie;
+        for (const ch of word) {
+            if (!node.children.has(ch)) {
+                node.children.set(ch, createNode());
             }
-            curr = curr.child[c];
+            node = node.children.get(ch)!;
         }
-        curr.isWord = true;
+        node.isWord = true;
     }
 
-    search(word: string, i = 0): boolean {
-        let curr: WordDictionary = this;
-        for(;i < word.length; i++) {
-            const c = word[i];
-            if(c !== '.') {
-                if(!curr.child[c]) { 
-                    return false; 
-                }
-                curr = curr.child[c];
+    search(word: string): boolean {
+        let nodes = [this.trie!]!;
+        for (const ch of word) {
+            if (ch !== '.') {
+                nodes = nodes.map(x => x.children.get(ch)).filter(x => !!x);
             } else {
-                for(const key in curr.child) {
-                    if(curr.child[key].search(word, i + 1)){
-                        return true;
-                    };
-                }
-                return false;
+                nodes = nodes.flatMap(x => Array.from(x.children.values()));
             }
         }
-        return curr.isWord;
+        return !!nodes.find(_ => _.isWord);
     }
 }
